@@ -2,6 +2,7 @@ package com.openclassrooms.chatPOC.auth.controllers;
 
 
 import com.openclassrooms.chatPOC.auth.payloads.LoginUserRequest;
+import com.openclassrooms.chatPOC.auth.responses.AuthenticationResponse;
 import com.openclassrooms.chatPOC.auth.services.AuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class AuthenticationController {
      */
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Boolean> loginUser(@Valid @RequestBody LoginUserRequest loginUserRequest) {
+    public ResponseEntity<AuthenticationResponse> loginUser(@Valid @RequestBody LoginUserRequest loginUserRequest) {
         var authenticationResponse = authenticationService.loginUser(loginUserRequest);
         return ResponseEntity.ok(authenticationResponse);
     }

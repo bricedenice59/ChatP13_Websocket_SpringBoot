@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: dev
+application:
+  security:
+    jwt:
+      secret-key: ${jwt-secret-pass}
+      expiration: 8640000
