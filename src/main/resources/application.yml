@@ -5,4 +5,10 @@ application:
   security:
     jwt:
       secret-key: ${jwt-secret-pass}
-      expiration: 8640000
+      expiration: 864000000
+logging:
+  level:
+    org:
+      springframework:
+        security:
+          web: DEBUG

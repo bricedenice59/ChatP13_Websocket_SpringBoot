@@ -1,4 +1,4 @@
-package com.openclassrooms.chatPOC.auth.config;
+ package com.openclassrooms.chatPOC.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

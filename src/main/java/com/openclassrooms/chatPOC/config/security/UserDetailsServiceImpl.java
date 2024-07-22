@@ -1,4 +1,4 @@
-package com.openclassrooms.chatPOC.config;
+package com.openclassrooms.chatPOC.config.security;
 
 
 import com.openclassrooms.chatPOC.repositories.UserRepository;

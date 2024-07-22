@@ -1,5 +1,6 @@
 package com.openclassrooms.chatPOC.chat;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import java.security.Principal;
 
 @Controller
+@Slf4j
 public class MessageController {
 
     private final SimpMessagingTemplate messagingTemplate;
@@ -16,14 +18,16 @@ public class MessageController {
         this.messagingTemplate = messagingTemplate;
     }
 
-    @MessageMapping("/chat.sendMessage")
-    public void sendMessage(@Payload ChatMessage chatmessage){
-        messagingTemplate.convertAndSendToUser(chatmessage.getReceiverName(),"/specific", chatmessage);
+    @MessageMapping("/chat")
+    public void sendToSpecificUser(@Payload ChatMessage message) {
+        log.info("Forwarding chat message to user: {}", message.getReceiverName());
+        messagingTemplate.convertAndSendToUser(message.getReceiverName(), "/topic", message);
     }
 
     @MessageMapping("/join")
-    public void addUser(Principal principal){
+    public void join(Principal principal){
         String joinMessage = principal.getName() + " has joined the chat";
+        log.info(joinMessage);
         messagingTemplate.convertAndSend("/topic/join", joinMessage);
     }
 }
