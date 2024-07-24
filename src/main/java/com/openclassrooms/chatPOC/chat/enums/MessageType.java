@@ -1,4 +1,4 @@
-package com.openclassrooms.chatPOC.chat;
+package com.openclassrooms.chatPOC.chat.enums;
 
 public enum MessageType {
     CHAT,

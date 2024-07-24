@@ -1,5 +1,6 @@
 package com.openclassrooms.chatPOC.chat;
 
+import com.openclassrooms.chatPOC.chat.enums.MessageType;
 import lombok.*;
 
 @Getter

@@ -1,7 +1,7 @@
 package com.openclassrooms.chatPOC.config.Websockets;
 
 import com.openclassrooms.chatPOC.chat.ChatMessage;
-import com.openclassrooms.chatPOC.chat.MessageType;
+import com.openclassrooms.chatPOC.chat.enums.MessageType;
 import com.openclassrooms.chatPOC.chat.services.ChatSessionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -48,7 +48,6 @@ public class WebSocketEventListener {
         var username = Objects.requireNonNull(event.getUser()).getName();
         if(username.isEmpty()) return;
 
-        chatSessionService.removeUserFromSession(username);
         log.info("Received web socket disconnect event from: {}", username);
 
         var chatMessage = ChatMessage.builder()
@@ -56,5 +55,7 @@ public class WebSocketEventListener {
                 .senderName(username)
                 .build();
         messageTemplate.convertAndSend("/topic/join", chatMessage);
+
+        chatSessionService.clearSession();
     }
 }
