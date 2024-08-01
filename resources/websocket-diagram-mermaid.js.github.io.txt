@@ -1,0 +1,12 @@
+sequenceDiagram
+participant Client
+participant WebSocketServer
+
+Client->>WebSocketServer: WebSocket Handshake Request (HTTP Upgrade)
+WebSocketServer-->>Client: WebSocket Handshake Response (101 Switching Protocols)
+
+Client->>WebSocketServer: Sends Message
+WebSocketServer-->>Client: Receives Message
+
+WebSocketServer->>Client: Sends Message
+Client-->>WebSocketServer: Receives Message

@@ -1,0 +1,22 @@
+graph TD;
+    Client -->|HTTP POST /login| SpringBootAPI[Spring Boot API];
+    Client -->|WebSocket Connection| WebSocketServer[WebSocket Server];
+    
+    SpringBootAPI -->|Validates User| Database[H2 InMemory Database];
+    SpringBootAPI -->|Responds with Token| Client;
+    
+    Client -->|Sends/Receives Messages| WebSocketServer;
+    
+    subgraph Backend [Spring Boot Application]
+        SpringBootAPI
+        WebSocketServer
+    end;
+    
+    subgraph Client [Angular Application]
+        direction TB
+        LoginComponent[Login Component]
+        ChatComponent[Chat Component]
+        
+        LoginComponent -->|POST /login| SpringBootAPI
+        ChatComponent -->|WebSocket Connection| WebSocketServer
+    end;
