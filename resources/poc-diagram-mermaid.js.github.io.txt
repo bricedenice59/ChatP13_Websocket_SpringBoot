@@ -3,17 +3,15 @@ graph TD;
     Client -->|WebSocket Connection| WebSocketServer[WebSocket Server];
     
     SpringBootAPI -->|Validates User| Database[H2 InMemory Database];
-    SpringBootAPI -->|Responds with Token| Client;
+    SpringBootAPI -->|Responds with JWT Token| Client;
     
-    Client -->|Sends/Receives Messages| WebSocketServer;
-    
-    subgraph Backend [Spring Boot Application]
+   
+    subgraph Backend [Web server: Spring Boot Application]
         SpringBootAPI
         WebSocketServer
     end;
     
-    subgraph Client [Angular Application]
-        direction TB
+    subgraph Client [Web Client: Angular Application]
         LoginComponent[Login Component]
         ChatComponent[Chat Component]
         
